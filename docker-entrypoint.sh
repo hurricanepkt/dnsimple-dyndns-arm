@@ -2,6 +2,7 @@
 
 [ "$1" = "update" ] || exec "$@" || exit $?
 
+
 IP=$(curl --ipv4 -s http://icanhazip.com/)
 
 curl -H "Authorization: Bearer $TOKEN" \
