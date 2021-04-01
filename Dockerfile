@@ -1,5 +1,6 @@
-FROM arm32v7/alpine AS build
-RUN apk update && apk upgrade && apk add curl 
+FROM arm32v7/alpine:3.10 AS build
+WORKDIR /tmp
+RUN apk update && apk add --no-cache curl 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 ENTRYPOINT [ "docker-entrypoint" ]
