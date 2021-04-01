@@ -20,6 +20,12 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
+      - name: docker login
+        env : 
+          DOCKERHUB_USER : ${{ secrets.DOCKERHUB_USER }}
+          DOCKERHUB_PASSWORD : ${{ secrets.DOCKERHUB_PASSWORD }}
+        run : |
+          docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
       - name: Set up Docker Buildx
         id: buildx
         uses: crazy-max/ghaction-docker-buildx@v1.0.4
@@ -27,11 +33,14 @@ jobs:
           version: latest
       - name: Available platforms
         run: echo ${{ steps.buildx.outputs.platforms }}
-      - name: Build and push moisture client container #see: https://github.com/marketplace/actions/docker-buildx
+      - name: Build dnsimple-dnyndns-arm 
         run: |
           docker buildx build \
-            --tag  dnsimple-dyndns-arm:latest \
+            --tag  markgreenway/dnsimple-dyndns-arm:latest \
             --platform linux/arm/v7 \
             --output "type=image" \
             --file ./Dockerfile \
             .
+      - name: Docker push
+        run: |
+          docker push markgreenway/dnsimple-dyndns-arm:latest
