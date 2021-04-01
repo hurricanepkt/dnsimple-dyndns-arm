@@ -20,33 +20,35 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: crazy-max/ghaction-docker-buildx@v1.0.4
-        with:
-          version: latest
-      - name: Available platforms
-        run: echo ${{ steps.buildx.outputs.platforms }}
-      - name: Build dnsimple-dnyndns-arm 
-        run: |
-          docker buildx build \
-            --tag  markgreenway/dnsimple-dyndns-arm:latest \
-            --platform linux/arm/v7 \
-            --output "type=image" \
-            --file ./Dockerfile \
-            .
+#      - name: Set up Docker Buildx
+#        id: buildx
+#        uses: crazy-max/ghaction-docker-buildx@v1.0.4
+#        with:
+#          version: latest
+#      - name: Available platforms
+#        run: echo ${{ steps.buildx.outputs.platforms }}
+#      - name: Build dnsimple-dnyndns-arm 
+#        run: |
+#          docker buildx build \
+#            --tag  markgreenway/dnsimple-dyndns-arm:latest \
+#            --platform linux/arm/v7 \
+#            --output "type=image" \
+#            --file ./Dockerfile \
+#            .
       - name: Publish to Docker Hub
         uses: docker/build-push-action@v1
         with: 
+          platforms: linux/arm/v7
           username :  ${{ secrets.DOCKERHUB_USERNAME }}
           password :  ${{ secrets.DOCKERHUB_PASSWORD }}
           repostiory :  markgreenway/dnsimple-dnyndns-arm
           tags: latest, ${{  github.run_number }}
-      - name: Publish to Github Packages 
-        uses : docker/build-push-action@v1
-        with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GIHUB_TOKEN }}
-          registry: docker.pkg.github.com
-          repository : ${{ github.repository}}/dnsimple-dyndns-arm
-          tags: latest, ${{  github.run_number }}
+          push : true
+#      - name: Publish to Github Packages 
+#        uses : docker/build-push-action@v1
+#        with:
+#          username: ${{ github.actor }}
+#          password: ${{ secrets.GIHUB_TOKEN }}
+#          registry: docker.pkg.github.com
+#          repository : ${{ github.repository}}/dnsimple-dyndns-arm
+#          tags: latest, ${{  github.run_number }}
