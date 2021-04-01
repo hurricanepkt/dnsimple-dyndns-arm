@@ -1,5 +1,4 @@
 FROM arm32v7/alpine:latest
-COPY tmp/qemu-arm-static /usr/bin/qemu-arm-static
 
 # set version label
 ARG BUILD_DATE
