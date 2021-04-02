@@ -13,6 +13,7 @@ do
      curl -H "Authorization: Bearer $TOKEN" \
           -H "Content-Type: application/json" \
           -H "Accept: application/json" \
+          -s \
           -X "PATCH" \
           $REQUEST_URL \
           -d "{\"content\":\"$IP\"}" \ 
