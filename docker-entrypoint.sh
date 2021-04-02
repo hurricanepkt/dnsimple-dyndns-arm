@@ -8,7 +8,7 @@ do
      REQUEST_URL="https://api.dnsimple.com/v2/$ACCOUNT_ID/zones/$ZONE_ID/records/$RECORD_ID"
      now="$(date +"%r")"
      IP=$(curl --ipv4 -s http://icanhazip.com/)
-     printf "\n$now\t-\t$IP\t-\t$REQUEST_URL\n"
+     printf "$now\t-\t$IP\t-\t$REQUEST_URL\t-\t"
 
      curl -H "Authorization: Bearer $TOKEN" \
           -H "Content-Type: application/json" \
@@ -17,6 +17,6 @@ do
           -X "PATCH" \
           $REQUEST_URL \
           -d "{\"content\":\"$IP\"}" \ 
-     printf "\nsleep"
+     printf "\n"
      sleep $SLEEP_DELAY
 done
