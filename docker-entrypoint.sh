@@ -4,6 +4,17 @@
 
 
 IP=$(curl --ipv4 -s http://icanhazip.com/)
+echo "IP"
+echo $IP
+
+echo "ACCOUNT_ID"
+echo $ACCOUNT_ID
+
+echo "ZONE_ID"
+echo $ZONE_ID
+
+echo "RECORD_ID"
+echo $RECORD_ID
 
 curl -H "Authorization: Bearer $TOKEN" \
      -H "Content-Type: application/json" \
