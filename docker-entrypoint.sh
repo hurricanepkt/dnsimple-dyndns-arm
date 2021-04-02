@@ -17,6 +17,6 @@ do
           -X "PATCH" \
           $REQUEST_URL \
           -d "{\"content\":\"$IP\"}" \ 
-
+     printf "\nsleep"
      sleep $SLEEP_DELAY
 done
