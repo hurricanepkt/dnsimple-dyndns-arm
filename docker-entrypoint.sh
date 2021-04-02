@@ -2,18 +2,18 @@
 
 [ "$1" = "update" ] || exec "$@" || exit $?
 
-
+URL = "https://api.dnsimple.com/v2/$ACCOUNT_ID/zones/$ZONE_ID/records/$RECORD_ID"
 while [ : ]
 do
      now="$(date +"%r")"
      IP=$(curl --ipv4 -s http://icanhazip.com/)
-     echo "$now - $IP"
+     printf "\n$now\t-\t$IP\t-\t$URL\n"
 
      curl -H "Authorization: Bearer $TOKEN" \
           -H "Content-Type: application/json" \
           -H "Accept: application/json" \
           -X "PATCH" \
-          -i "https://api.dnsimple.com/v2/$ACCOUNT_ID/zones/$ZONE_ID/records/$RECORD_ID" \
+          $URL \
           -d "{\"content\":\"$IP\"}" \ 
 
      sleep $SLEEP_DELAY
