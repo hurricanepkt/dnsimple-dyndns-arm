@@ -43,8 +43,8 @@ jobs:
           tags: |
             markgreenway/dnsimple-dnyndns-arm:latest
             markgreenway/dnsimple-dnyndns-arm:run_${{  github.run_number }}
-            ghcr.io/markgreenway/dnsimple-dnyndns-arm:latest
-            ghcr.io/markgreenway/dnsimple-dnyndns-arm:run_${{ github.run_number }}
+  #          ghcr.io/markgreenway/dnsimple-dnyndns-arm:latest
+  #          ghcr.io/markgreenway/dnsimple-dnyndns-arm:run_${{ github.run_number }}
           push : true
 #      - name: Publish to Github Packages 
 #        uses : docker/build-push-action@v1
