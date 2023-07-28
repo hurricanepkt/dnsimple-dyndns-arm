@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:22.04 as BUILD
 RUN apt update\
     && apt install curl -y
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
